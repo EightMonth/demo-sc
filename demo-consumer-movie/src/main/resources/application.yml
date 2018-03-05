@@ -1,0 +1,46 @@
+server:
+  port: 8010
+
+user:
+  userServiceUrl: http://localhost:8000/
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true #将自身的健康状态发送给注册中心
+    service-url:
+      # defaultZone: http://localhost:8761/eureka/ #注册到不需要认证的注册中心
+      defaultZone: http://user:123456@localhost:8761/eureka/ #注册到需要认证的注册中心
+  instance:
+    # 这里若是false，将会把os名字注册到注册中心，反之为ip
+    prefer-ip-address: true
+
+spring:
+  application:
+    name: consumer-movice
+
+# 启用feign对请求的压缩
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
+# 将Feign接口的日志级别设置成DEBUG， 因为Feign的Logging.Level只对DEBUG作出响应
+Logging:
+  level:
+    io.eightmonth.sc.democonsumermovie.feign.UserFeignClient: DEBUG
+
+# 脱离eureka的使用，若想脱离eureka的使用，必须去掉eureka的依赖，eureka中包含ribbon的依赖
+#provider-user:
+#  ribbon:
+#    listOfServers: localhost:8000,localhost:8001 #服务地址
+
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@

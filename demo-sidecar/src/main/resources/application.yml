@@ -1,0 +1,18 @@
+server:
+  port: 8070
+
+spring:
+  application:
+    name: sidecar
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+sidecar:
+  port: 8060 # \u975EJVM\u670D\u52A1\u7AEF\u53E3
+  health-uri: http://localhost:8060/health.json #\u975EJVM\u670D\u52A1\u5730\u5740
+
