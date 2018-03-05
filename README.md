@@ -11,3 +11,4 @@
 - turbine 配置hystrix，集合监控数据
 - zuul API网关
 - sidecar 转换非JVM服务为JVM服务
+- config 配置中心
