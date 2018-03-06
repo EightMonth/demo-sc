@@ -12,8 +12,6 @@ eureka:
 
 
 spring:
-  application:
-    name: provider-user
   jpa:
     generate-ddl: false
     show-sql: true
@@ -28,6 +26,7 @@ spring:
 logging:
   level:
     root: info
+    org.springframework.cloud.sleuth: debug
     org.hibernate: info
     org.hibernate.type.descriptor.sql.BasicBinder: trace
     org.hibernate.type.descriptor.sql.BasicExtractor: trace

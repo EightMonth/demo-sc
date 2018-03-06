@@ -69,9 +69,9 @@ public class MovieController {
      */
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Long id){
-//        return restTemplate.getForObject(userServiceUrl + id, User.class);
+        return restTemplate.getForObject(userServiceUrl + id, User.class);
         // 接入eureka之后的服务调用
-        return restTemplate.getForObject("http://provider-user/" + id, User.class);
+//        return restTemplate.getForObject("http://provider-user/" + id, User.class);
     }
 
     public User findByIdFallback(Long id){
