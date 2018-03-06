@@ -14,3 +14,4 @@ eureka:
 turbine:
   app-config: consumer-movie,consumer-ticket
   cluster-name-expression: "'default'"
+  combine-host-port: true
