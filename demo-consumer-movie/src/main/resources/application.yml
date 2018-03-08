@@ -1,12 +1,45 @@
-# \u5982\u679C\u4F7F\u7528spring cloud consul config\uFF0C\u4E0B\u9762\u8FD9\u6BB5\u4E3B\u673A\u53CA\u7AEF\u53E3\u7684\u914D\u7F6E\u9700\u8981\u653E\u5230bootstrap\u4E2D
-spring:
-  cloud:
-    consul:
-      discovery:
-        health-check-interval: 15s
-#        tags: foo=bar, baz
-#        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-  application:
-    name: consumer-movie
 server:
   port: 8010
+
+user:
+  userServiceUrl: http://localhost:8000/
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true #将自身的健康状态发送给注册中心
+    service-url:
+      # defaultZone: http://localhost:8761/eureka/ #注册到不需要认证的注册中心
+      defaultZone: http://user:123456@localhost:8761/eureka/ #注册到需要认证的注册中心
+  instance:
+    # 这里若是false，将会把os名字注册到注册中心，反之为ip
+    prefer-ip-address: true
+
+# 启用feign对请求的压缩
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
+# 将Feign接口的日志级别设置成DEBUG， 因为Feign的Logging.Level只对DEBUG作出响应
+Logging:
+  level:
+    root: info
+    io.eightmonth.sc.democonsumermovie.feign.UserFeignClient: DEBUG
+    org.springframework.web.servlet.DispatcherServlet: debug
+
+
+# 脱离eureka的使用，若想脱离eureka的使用，必须去掉eureka的依赖，eureka中包含ribbon的依赖
+#provider-user:
+#  ribbon:
+#    listOfServers: localhost:8000,localhost:8001 #服务地址
+
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@

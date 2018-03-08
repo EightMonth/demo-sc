@@ -1,5 +1,8 @@
 spring:
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
+  application:
+    name: consumer-movce

@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/EightMonth/spring-cloud-config-repo
+          username: EightMonth
+          password: iPHone6S
+        health:
+          repositories:
+            a-foo:
+              label: config-label-v2.0
+              name: microservice-foo
+              profiles: dev
+logging:
+  level:
+    org.springframework.cloud: debug
+    org.springframework.boot: debug

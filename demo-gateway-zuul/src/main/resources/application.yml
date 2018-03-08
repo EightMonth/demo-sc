@@ -1,0 +1,39 @@
+server:
+  port: 8040
+
+spring:
+  application:
+    name: gateway-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka/
+zuul:
+  # \u670D\u52A1\u8DEF\u7531\u6620\u5C04
+  routes:
+    user-route:
+      path: /user/**
+      service-id: provider-user
+    movie-route:
+      path: /movie/**
+      service-id: consumer-movice
+    sidecar-route:
+      path: /sidecar/**
+      service-id: sidecar
+  # \u5FFD\u7565\u670D\u52A1
+#  ignored-services: consumer-movice # '*' \u53EF\u5FFD\u7565\u6240\u6709\u670D\u52A1
+
+ribbon:
+  eureka:
+    enabled: false # \u4E3Aribbon\u5173\u95EDeureka
+
+provider-user:
+  ribbon:
+    listOfServers: localhost:8000, localhost:8001
+consumer-movice:
+  ribbon:
+    listOfServers: localhost:8010
+sidecar:
+  ribbon:
+    listOfServers: localhost:8070
