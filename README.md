@@ -1,5 +1,5 @@
 # demo-sc
-（以eureka为注册中心的一套基本组件已更新结束，接下来会尝试去做以consul为注册中心的一套，将新建分支consul）
+（master分支是eureka，consul分支是consul）
 全称：demo-spring-cloud
 
 本例是以eureka为注册中心
